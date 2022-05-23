@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRYPTO CALC</title>
+    <style>
+        body {
+          font-family: 'Courier New', monospace;
+        }
+
+        .coin-area{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .PNL-area{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        </style>
+</head>
+<body>
+    <h1>CRYPTO CAL</h1>
+
+        <div id="coin-area">
+
+            <div>
+                <label for="coin">Coin Price : </label>
+                <input type="text" id="coin">    
+            </div>
+            
+            <div>
+                <label for="buy-amount">Amount : </label>
+                <input type="number" id="buy-amount">
+            </div>
+            
+            
+            <button id = "cal-coin">CAL</button>
+            <br>
+            <div id="coin-amnt-dis"></div>
+        </div>
+        <br>
+        <br>
+        <div id="PNL-area">
+
+            <label for="coin-price-PNL">Coin Price : </label>
+            <input type="text" id="coin-price-PNL">
+            
+            <label for="buy-amount-PNL">Buy Amnt : </label>
+            <input type="number" id="buy-amount-PNL">
+            
+            <label for="sell-amount-PNL">Sell Coin Price : </label>
+            <input type="number" id="sell-amount-PNL">
+
+            <button id = "cal-PNL">CAL</button>
+            <br>
+            <div id="PNL-dis"></div>
+        </div>
+
+
+   
+</body>
+<script>
+
+    var coin_area = document.getElementById("coin-area") 
+    var coin_price = document.getElementById("coin")
+    var buy_amount = document.getElementById("buy-amount")
+    var calc_btn = document.getElementById("cal-coin")
+    var display_node = document.getElementById("coin-amnt-dis")
+    calc_btn.addEventListener("click", () => {
+        
+        display_node.innerHTML=""
+        var coin_amnt = ((1/ parseFloat(coin_price.value))* parseFloat(buy_amount.value)).toString()
+        
+        display_node.appendChild(document.createTextNode(coin_amnt))
+        coin_area.appendChild(display_node)
+
+    })
+
+    var coin_area_pnl = document.getElementById("PNL-area")
+    var coin_price_pnl = document.getElementById("coin-price-PNL")
+    var buy_amnt_pnl = document.getElementById("buy-amount-PNL")
+    var sell_amnt_pnl = document.getElementById("sell-amount-PNL") 
+    var calc_pnl_btn = document.getElementById("cal-PNL")
+    var display_pnl_node = document.getElementById("PNL-dis")
+
+    calc_pnl_btn.addEventListener("click",() =>{
+
+        display_pnl_node.innerHTML=""
+
+        var no_of_coin = ((1/ parseFloat(coin_price_pnl.value))* parseFloat(buy_amnt_pnl.value))
+
+        var pnl = no_of_coin*(parseFloat(sell_amnt_pnl.value))
+
+        if(parseFloat(buy_amnt_pnl.value)<pnl){
+
+            display_pnl_node.style.color = "green"
+            display_pnl_node.style.fontWeight = "900"
+        }
+
+
+        else{
+            display_pnl_node.style.fontWeight = "900"
+            display_pnl_node.style.color = "red"
+        } 
+            
+
+        display_pnl_node.appendChild(document.createTextNode(pnl.toString()))
+
+        coin_area_pnl.appendChild(display_pnl_node)
+
+    })
+
+</script>
+
+</html>
